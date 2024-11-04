@@ -44,7 +44,7 @@ public class Playercon : MonoBehaviour
 
         //攻撃処理
         //コントローラーの🔳ボタンの処理
-        if(Input.GetKey(KeyCode.U) || Input.GetButton("Fire_0")) Atackmove();
+        if(Input.GetKey(KeyCode.U)) Atackmove();
 
     }
 

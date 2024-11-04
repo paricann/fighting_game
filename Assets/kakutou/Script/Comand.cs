@@ -1,125 +1,81 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using JetBrains.Annotations;
+using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Comand : MonoBehaviour
 {
-   /// <summary>　/// コマンド技名　/// </summary>
-    private enum COMANDID
+    /// <summary>
+    /// キー入力enum
+    /// </summary>
+    /// 値は二進数
+    /// <param>
+    /// ZEROはブランク
+    /// </param>
+    public enum KEYBIT
     {
-        hadouken = 8,
-        tatumaki = 18,
-        syouryuuken = 20,
+        ZERO       = 0x0000_0000,
+        UP_BIT     = 0x0000_0001,
+        DOWN_BIT   = 0x0000_0002,
+        LEFT_BIT 　= 0x0000_0004,
+        RIGHT_BIT  = 0x0000_0008,
+        ATACK1_BIT = 0x0000_0016,
     }
 
-    /// <summary> /// 入力値 /// </summary>
-    private enum COMANDNUM
-    {
-        neutral = 0b_00000000,
-        inputup = 0b_00000001,
-        inputdown = 0b_00000010,
-        inputleft = 0b_00000011,
-        inputright = 0b_00000100,
-         U_punchi = 0b_00000110,
+    /// <summary> // 入力制限時間// </summary>
+    [SerializeField] public int flame;
 
-    }
+    /// <summary>/// キーパターンの数(keyの要素数、最大16) /// </summary>
+    [SerializeField] public int count;
 
-    /*
-    /// <summary> /// 攻撃ボタン /// </summary>
-    private enum INPUTBUTTON
-    {
-        neutral = 0b_00000000,
-        U_punchi = 0b_00000110,
-        I_tyupan,
-        J_kikku,
-    }
-    */
+    /// <summary> /// キーパターン（KEYBITの組み合わせで指定) /// </summary>
+    public uint[] key = new uint[16];
 
-    /// <summary> /// コマンド入力時間 /// </summary>
-    [SerializeField] private float inputsecond = 0.2f; //入力時間
-    [SerializeField] private float inputstarttime; //入力開始時間
-    private bool inputflg = false; //入力判定用フラグ
-    private bool comandflag = false;
-    private string comandhold; //testコマンドID照合用変数
-    private string  comandname; //enumの中身を照合する用の変数
-    
-    
-    
-    /// <summary>　/// コマンド入力用関数　/// </summary>
+    [SerializeField] public const int bfcount = 256;
+    public uint[] gkeyComand = new uint[bfcount];
+
     private void Update()
     {
-        //宣言＆初期化
-        float x = 0;
-        float y = 0;
-    
-        //入力
-        x = Input.GetAxisRaw("Horizontal") / 1;//方向キー（右左）
-        y = Input.GetAxisRaw("Vertical") / 1;  //方向キー(上下)
+        //過去のキー入力分を１つずつずらす
+        for(int i = bfcount - 1; i > 0; i--)
+        {
+            gkeyComand[i] = gkeyComand[i - 1];
+        }
 
-        ///値確認用Debug.Log
-        Debug.Log(x + "xの値確認");
-        Debug.Log(y + "yの値確認");
+        //今回のフレームで入力されたキーを保存する
+        gkeyComand[0] = (uint)KEYBIT.ZERO;
+        //入力WASD,OR演算->|=
+        if (Input.GetKeyDown(KeyCode.A)) { gkeyComand[0] |= (uint)KEYBIT.LEFT_BIT;   }
+        if (Input.GetKeyDown(KeyCode.D)) { gkeyComand[0] |= (uint)KEYBIT.RIGHT_BIT;  }
+        if (Input.GetKeyDown(KeyCode.S)) { gkeyComand[0] |= (uint)KEYBIT.DOWN_BIT;   }
+        if (Input.GetKeyDown(KeyCode.W)) { gkeyComand[0] |= (uint)(KEYBIT.UP_BIT);   }
 
-        var comand = COMANDNUM.neutral;  //コマンド初期状態
-        //var inputbutton = INPUTBUTTON.neutral; //攻撃ボタン用変数
+        Debug.Log(gkeyComand[0] + "コマンド入力確認");
 
-
-            if(!inputflg)
-            {
-                inputstarttime = Time.time;
-                inputflg = true;
-                comandflag = true;
-            }
-        
-            if(inputflg && Time.time - inputstarttime <= inputsecond)
-            {
-                
-                //コマンド入力された時の処理
-                if(x < -1)
-                { 
-                    comand |= COMANDNUM.inputleft; 
-                    Debug.Log(comand + "左入力確認");
-                }
-                if(x > 1){comand |= COMANDNUM.inputright;}
-                if(y < -1){comand |= COMANDNUM.inputdown;}
-                if(y > 1){comand |= COMANDNUM.inputup;}
-                if(Input.GetKeyDown(KeyCode.U)) {comand &= COMANDNUM.U_punchi;}
-                Debug.Log("コマンド入力確認" + comand);
-
-                //入力したコマンドをholdにstring型として代入
-                ///上記の代入した変数をfloat型変換
-                comandhold = comand.ToString();
-                //int.Parse(comandhold);
-
-                //コマンド照合用変数（仮）
-                ///enumの中身をstring型に変換
-                ///float型に変換
-                comandname = COMANDID.hadouken.ToString(); 
-                //int.Parse(comandname);
-                
-                if(comandhold == comandname)
-                {
-                    Debug.Log("確認");
-                    ComandActive();
-                }
-                
-
-            }
-            else if(inputflg && Time.time - inputstarttime > inputsecond)
-            {
-                //コマンド入力終了時の処理
-                inputflg = false;
-                comandflag = false;
-            }
-        
-   
     }
-    private void ComandActive()
+
+
+    public Comand(int fm,int ct, uint[] ky) 
     {
-        Debug.Log("波動拳発動");
+        flame = fm;
+        count = ct;
+        key = ky;
     }
-   
+}
+
+public static class CommandPattern
+{
+    public static Comand gcomandRed = new Comand(
+        60,
+        4,
+        new uint[]
+        {
+           
+        }
+        );
 }

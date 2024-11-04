@@ -453,11 +453,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 294c93bc06529d54c9baf322c8934c21, type: 3}
   cam: {fileID: 519420028}
   scrollspead: 1
---- !u!1 &295205539 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6127390443125292241, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-  m_PrefabInstance: {fileID: 2175358255796967452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &323691256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2839,7 +2834,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8139168299989098619, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
   m_PrefabInstance: {fileID: 2175358255796967452}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295205539}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad8e33015247874e8807c50c86be193, type: 3}
@@ -2850,20 +2845,6 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3553230714559707040, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
   m_PrefabInstance: {fileID: 2175358255796967452}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2143291491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295205539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b70539cc0f354764a8146859e55594c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputsecond: 0.2
-  inputstarttime: 0
 --- !u!1001 &2175358255796967452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2872,33 +2853,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2571149204974298429, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: m_Size.y
-      value: 3.2253108
-      objectReference: {fileID: 0}
-    - target: {fileID: 2571149204974298429, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.0073447824
-      objectReference: {fileID: 0}
-    - target: {fileID: 3553230714559707040, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: m_Size.y
-      value: 0.81805915
-      objectReference: {fileID: 0}
-    - target: {fileID: 3553230714559707040, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: m_Offset.y
-      value: -1.3009259
-      objectReference: {fileID: 0}
     - target: {fileID: 6127390443125292241, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
       propertyPath: m_Name
       value: player1-2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6327679869716820110, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0181
-      objectReference: {fileID: 0}
-    - target: {fileID: 6327679869716820110, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0206
       objectReference: {fileID: 0}
     - target: {fileID: 6327679869716820110, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2945,10 +2902,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 190549359}
     - target: {fileID: 8139168299989098619, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: hitenemys.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8139168299989098619, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
       propertyPath: hitenemys.Array.data[0]
       value: 
       objectReference: {fileID: 1503966775}
@@ -2960,17 +2913,10 @@ PrefabInstance:
       propertyPath: hitenemys.Array.data[2]
       value: 
       objectReference: {fileID: 375483595}
-    - target: {fileID: 8139168299989098619, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      propertyPath: hitenemys.Array.data[3]
-      value: 
-      objectReference: {fileID: 1503966775}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6127390443125292241, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2143291491}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
 --- !u!1001 &8221906466398598676
 PrefabInstance:
