@@ -3,6 +3,7 @@ namespace fighting_game
 {
     public class charactorbase : MonoBehaviour
     {
+
         [SerializeField] protected float   _chSpeed;
         [SerializeField] protected float   _chStatus;
         [SerializeField] protected float[] _chPower;
@@ -15,7 +16,9 @@ namespace fighting_game
         protected SpriteRenderer _sprite;
         protected Rigidbody2D    _rb;
         protected Collider2D     _hitColi;
-        protected Animator       _animator;
+        protected Animator _animator;
+
+        
 
         protected void Start()
         {
