@@ -8,7 +8,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Comand : MonoBehaviour
+public class Command : MonoBehaviour
 {
     /// <summary>
     /// キー入力enum
@@ -28,36 +28,30 @@ public class Comand : MonoBehaviour
     }
 
 
-    public static Comand hadouken = new Comand(
+    public static Command hadouken = new Command(
        60,//入力制限時間(フレーム）
         4,//キーパターン数
           new uint[]
           {
-               (uint)(Comand.KEYBIT.DOWN_BIT),
-               (uint)(Comand.KEYBIT.DOWN_BIT | Comand.KEYBIT.RIGHT_BIT),
-               (uint)(Comand.KEYBIT.RIGHT_BIT),
-               (uint)(Comand.KEYBIT.ATACK1_BIT),
+               (uint)(Command.KEYBIT.DOWN_BIT),
+               (uint)(Command.KEYBIT.DOWN_BIT | Command.KEYBIT.RIGHT_BIT),
+               (uint)(Command.KEYBIT.RIGHT_BIT),
+               (uint)(Command.KEYBIT.ATACK1_BIT),
            }
            );
 
 
-    public Comand(int fm, int ct, uint[] ky)
+    public Command(int fm, int ct, uint[] ky)
     {
         flame = fm;
         count = ct;
         key = ky;
     }
 
-    /// <summary> // 入力制限時間// </summary>
-    [SerializeField] public int flame;
-
-    /// <summary>/// キーパターンの数(keyの要素数、最大16) /// </summary>
-    [SerializeField] public int count;
-
-    /// <summary> /// キーパターン（KEYBITの組み合わせで指定) /// </summary>
-    public uint[] key = new uint[16];
-
     [SerializeField] public const int bfcount = 256;
+    [SerializeField] public int flame; //入力制限時間
+    [SerializeField] public int count; // キーパターンの数(keyの要素数、最大16)
+    public uint[] key = new uint[16];  // キーパターン（KEYBITの組み合わせで指定)
     public uint[] gkeyComand = new uint[bfcount];
 
     private void Start()
@@ -94,17 +88,35 @@ public class Comand : MonoBehaviour
     /// <summary>/// コマンド入力判定用/// </summary>
     public void CheckComand()
     {
-       int n = 0; //コマンドパターンが何番目まで合致したか示す変数
-       for(int i = Comand.hadouken.flame - 1;i >= 0; i--)
+       int _commandIndex = 0; //コマンドパターンが何番目まで合致したか示す変数
+       for(int i = flame - 1;i >= 0; i--)
         {
-            if(gkeyComand[i] == hadouken.key[n])
+
+            if(gkeyComand[i] == hadouken.key[_commandIndex])
             {
-                //コマンドの入力処理
-                Debug.Log("成功！！！！");
+                //一致した場合、次のパターンへ
+                _commandIndex++;
+                //すべてのコマンドパターン一致
+                if(_commandIndex == hadouken.count)
+                {
+                    ExecuteComand();
+                    break;
+                }
+            }
+            else
+            {
+                //一致しない場合、コマンドをリセット
+                _commandIndex = 0;
             }
         }
     } 
     
+    /// <summary> /// コマンド実行処理 /// </summary>
+    private void ExecuteComand()
+    {
+        Debug.Log("コマンド成功");
+        //アニメーション
+    }
 }
 
 
