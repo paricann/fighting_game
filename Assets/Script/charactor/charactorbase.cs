@@ -11,14 +11,13 @@ namespace fighting_game
         [SerializeField] protected float   _gravity;
         [SerializeField] protected bool    _isGrounded;
         [SerializeField] protected bool    _isDead;
+        [SerializeField]protected float          _atackradius;
+        [SerializeField] protected  Transform    _atackPoint;
 
-        protected float          _atackradius;
-        protected Transform      _atackPoint;
         protected SpriteRenderer _sprite;
         protected Rigidbody2D    _rb;
         protected Collider2D     _hitColi;
         protected Animator _animator;
-        
         protected hp_sc _hp;
 
         /// <summary> /// hp_scへ体力受け渡し/// </summary>
@@ -29,7 +28,7 @@ namespace fighting_game
             return _maxHelth;
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
             //体力の初期化
             //componentの取得
@@ -38,7 +37,7 @@ namespace fighting_game
             //_Chpowerの初期化
         }
 
-        protected void Update() 
+        protected virtual void Update() 
         {
             Adjust();
             Move();
@@ -57,7 +56,7 @@ namespace fighting_game
         }
 
         /// <summary> /// 当たり判定の円に色をつける /// </summary>
-        private void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(_atackPoint.position,_atackradius);
@@ -66,7 +65,7 @@ namespace fighting_game
 
         /// <summary> /// damage処理　/// </summary>
         /// <param name="dmg"> /// _chPowerがダメージ </param>
-        protected void Damage(float[] _dmgs)
+        protected virtual void Damage(float[] _dmgs)
         {
             //アニメーターの処理
             foreach (float dm in _dmgs)
@@ -81,26 +80,26 @@ namespace fighting_game
         }
 
         /// <summary> /// 各キャラの動き /// </summary>
-        protected void Move()
+        protected virtual void Move()
         {
             //それぞれの移動処理
         }
          
         /// <summary> /// 各キャラの攻撃 /// </summary>
-        protected void Atack()
+        protected virtual void Atack()
         {
             //それぞれの攻撃処理
         } 
         
         /// <summary> /// 各キャラのジャンプ処理 /// </summary>
-        protected void Jump()
+        protected virtual void Jump()
         {
             //それぞれのジャンプの処理
         }
 
         /// <summary> /// 各キャラの防御/// </summary>
         /// <param name="_power">  防御に関連するパワー(配列) </param>
-        protected void Defense(float[] _powers)
+        protected virtual void Defense(float[] _powers)
         {
             //それぞれの防御
             foreach (float power in _powers)
@@ -110,7 +109,7 @@ namespace fighting_game
         }
 
         /// <summary> /// 各キャラの死亡処理 /// </summary>
-        protected void Dead()
+        protected virtual void Dead()
         {
             //各死亡処理
             //animatorによるアニメーション処理
