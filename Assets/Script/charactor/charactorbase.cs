@@ -1,14 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class charactorbase : MonoBehaviour
+namespace fighting_game
 {
-    // Start is called before the first frame update
-    void Start()
+    public class charactorbase : MonoBehaviour
     {
-<<<<<<< Updated upstream
-=======
+
         [SerializeField] protected float   _chSpeed;
         [SerializeField] protected float   _chStatus;
         [SerializeField] protected float[] _chPower;
@@ -22,6 +17,8 @@ public class charactorbase : MonoBehaviour
         protected Rigidbody2D    _rb;
         protected Collider2D     _hitColi;
         protected Animator _animator;
+
+        
 
         protected void Start()
         {
@@ -58,13 +55,17 @@ public class charactorbase : MonoBehaviour
         {
             //それぞれの攻撃処理
         } 
->>>>>>> Stashed changes
         
-    }
+        protected void Jump()
+        {
+            //それぞれのジャンプの処理
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected void Defense()
+        {
+            //それぞれの防御
+        }
     }
+    
 }
+
