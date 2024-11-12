@@ -6,12 +6,10 @@ namespace fighting_game
     {
         public Collider2D[] _hitEnemys;
         public LayerMask _layerMask;
-
         protected override void Update()
         {
             base.Update();
         }
-
 
         protected override void Move()
         {
@@ -22,14 +20,39 @@ namespace fighting_game
             {
                 _move = 0f;
             }
+
             if (_move < 0f) { transform.localScale = new Vector2(-1, 1);}
             if (_move > 0f) { transform.localScale = new Vector2(1, 1); }
 
-                //animatorÇÃèàóù
+             //animatorÇÃèàóù
 
-                _rb.velocity = new Vector2(_move * _chSpeed, _rb.velocity.y);
+            _rb.velocity = new Vector2(_move * _chSpeed, _rb.velocity.y);
         }
 
-        
+
+        protected override void Atack()
+        {
+            Debug.Log("???????");
+            _hitEnemys = Physics2D.OverlapCircleAll(_atackPoint.position,_atackradius);
+            foreach(Collider2D hitenemy in _hitEnemys)
+            {
+
+            }
+        }
+
+        protected override void Defense(float[] _powers)
+        {
+            base.Defense(_powers);
+        }
+
+        protected override void Jump()
+        {
+            
+        }
+
+        protected override void Dead()
+        {
+            
+        }
     }
 }

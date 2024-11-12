@@ -22,7 +22,7 @@ public class Command : MonoBehaviour
         ZERO       = 0x0000_0000,
         UP_BIT     = 0x0000_0001,
         DOWN_BIT   = 0x0000_0002,
-        LEFT_BIT 　= 0x0000_0004,
+        LEFT_BIT   = 0x0000_0004,
         RIGHT_BIT  = 0x0000_0008,
         ATACK1_BIT = 0x0000_0010,
     }
@@ -91,10 +91,10 @@ public class Command : MonoBehaviour
        int _commandIndex = 0; //コマンドパターンが何番目まで合致したか示す変数
        for(int i = flame - 1;i >= 0; i--)
         {
-
             if(gkeyComand[i] == hadouken.key[_commandIndex])
             {
                 //一致した場合、次のパターンへ
+                Debug.Log("コマンド一部成功" + gkeyComand[i]);
                 _commandIndex++;
                 //すべてのコマンドパターン一致
                 if(_commandIndex == hadouken.count)
