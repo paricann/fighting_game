@@ -10,6 +10,7 @@ namespace fighting_game
         protected override void Update()
         {
             base.Update();
+            Debug.Log("tamesi");
         }
 
 
@@ -29,7 +30,7 @@ namespace fighting_game
 
                 _rb.velocity = new Vector2(_move * _chSpeed, _rb.velocity.y);
         }
-
+        
         
     }
 }
