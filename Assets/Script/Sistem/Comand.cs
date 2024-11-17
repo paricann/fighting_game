@@ -10,13 +10,9 @@ using UnityEngine;
 
 public class Command : MonoBehaviour
 {
-    /// <summary>
-    /// キー入力enum
-    /// </summary>
-    /// 値は二進数
-    /// <param>
-    /// ZEROはブランク
-    /// </param>
+
+    /// <summary>  /// キー入力enum /// </summary> /// 値は二進数
+    /// <param> /// ZEROはブランク /// </param>
     public enum KEYBIT
     {
         ZERO       = 0x0000_0000,
@@ -40,6 +36,17 @@ public class Command : MonoBehaviour
            }
            );
 
+    public static Command test = new Command(
+        120,
+        3,
+        new uint[]
+        {
+            (uint)Command.KEYBIT.UP_BIT,
+            (uint)Command.KEYBIT.RIGHT_BIT,
+            (uint)(Command.KEYBIT.LEFT_BIT),
+        }
+        );
+
 
     public Command(int fm, int ct, uint[] ky)
     {
@@ -62,26 +69,26 @@ public class Command : MonoBehaviour
 
     private void Update()
     {
+        //キー入力を毎フレーム初期化
+        uint currentInput = (uint)KEYBIT.ZERO;
+
+        //入力WASD,OR演算->|=
+        if (Input.GetKey(KeyCode.D)) { currentInput |= (uint)KEYBIT.RIGHT_BIT; }
+        if (Input.GetKey(KeyCode.S)) { currentInput |= (uint)KEYBIT.DOWN_BIT; }
+        if (Input.GetKey(KeyCode.W)) { currentInput |= (uint)KEYBIT.UP_BIT; }
+        if (Input.GetKey(KeyCode.U)) { currentInput |= (uint)KEYBIT.ATACK1_BIT; }
+        if (Input.GetKey(KeyCode.A)) { currentInput |= (uint)KEYBIT.LEFT_BIT; }
+
         //過去のキー入力分を１つずつシフト
-        for(int i = bfcount - 1; i > 0; i--)
+        for (int i = Command.bfcount - 1; i > 0; i--)
         {
             gkeyComand[i] = gkeyComand[i - 1];
         }
 
-        //キー入力を毎フレーム初期化
-        uint curentInput = (uint)KEYBIT.ZERO;
-
-        //入力WASD,OR演算->|=
-        if (Input.GetKey(KeyCode.D)) { curentInput |= (uint)KEYBIT.RIGHT_BIT;  }
-        if (Input.GetKey(KeyCode.S)) { curentInput |= (uint)KEYBIT.DOWN_BIT;   }
-        if (Input.GetKey(KeyCode.W)) { curentInput |= (uint) KEYBIT.UP_BIT ;   }
-        if (Input.GetKey(KeyCode.U)) { curentInput |= (uint)KEYBIT.ATACK1_BIT; }
-        if (Input.GetKey(KeyCode.A)) { curentInput |= (uint)KEYBIT.LEFT_BIT;   }
-            
-        gkeyComand[0] = curentInput;
+        gkeyComand[0] = currentInput;
 
         Debug.Log("入力確認" + gkeyComand[0]);
-        CheckComand();
+        //CheckComand();
         
     }
 
@@ -89,18 +96,17 @@ public class Command : MonoBehaviour
     public void CheckComand()
     {
        int _commandIndex = 0; //コマンドパターンが何番目まで合致したか示す変数
-       for(int i = flame - 1;i >= 0; i--)
+       for(int i = test.flame - 1;i >= 0; i--)
         {
-            if(gkeyComand[i] == hadouken.key[_commandIndex])
+            if (gkeyComand[i] == key[_commandIndex])
             {
                 //一致した場合、次のパターンへ
                 Debug.Log("コマンド一部成功" + gkeyComand[i]);
                 _commandIndex++;
                 //すべてのコマンドパターン一致
-                if(_commandIndex == hadouken.count)
+                if(_commandIndex == count)
                 {
                     ExecuteComand();
-                    break;
                 }
             }
             else
@@ -109,6 +115,7 @@ public class Command : MonoBehaviour
                 _commandIndex = 0;
             }
         }
+       
     } 
     
     /// <summary> /// コマンド実行処理 /// </summary>

@@ -17,18 +17,20 @@ namespace fighting_game
         public LayerMask playerlayer;
         public Collider2D[] hitplayers;
         public Transform eneatackpoint;
+
         private bool initiateAI;                          //敵が動くか動かないかの判定用フラグ
         private bool closecombat;                         //敵がプレイヤーを攻撃するかしないのか判定用フラグ   
         private bool gotRandom;                           //フレーム(行動)ごとに乱数を更新しないようにするための管理フラグ
+
         private float storeRandom;                        //浮動小数点型のランダムな値を取得するための変数
         private float cltimer;
-        public float closeRate = 0.5f;
         private float aitimer;
-        public float aiStateLife = 1;                    //どのくらいで循環するかをどのくらいで決定するか
         private float nrRate = 1;
         private float nrtimer;
-        public float ChangeStateTorance = 3;
 
+        public float ChangeStateTorance = 3;
+        public float closeRate = 0.5f;
+        public float aiStateLife = 1;                     //どのくらいで循環するかをどのくらいで決定するか
         [Header("atack")]
         private bool atackmove = false;                   //攻撃判定用フラグ
         private float atackrandom;
@@ -60,6 +62,8 @@ namespace fighting_game
             Agent();            //enemyの行動
 
         }
+
+        //共通化
         void Adjust()
         {
             Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
@@ -96,6 +100,7 @@ namespace fighting_game
                 }
             }
         }
+        //共通化
         public void ENEdame(float dmg)
         {
             movecheck = false;
@@ -108,6 +113,7 @@ namespace fighting_game
                 Enedie();
             }
         }
+
 
 
         public void Enedie() //enemyの死亡処理
@@ -157,6 +163,7 @@ namespace fighting_game
             animator.SetBool("atack1", false);
         }
 
+        //共通化
         private void Jump()
         {
             //jumpはenemymoveに処理を書く？ー＞処理がややこしくなるかも？
@@ -227,7 +234,7 @@ namespace fighting_game
         }
 
 
-
+        //共通化
         private void Enebrock()
         {
             //enemyの防御処理
@@ -333,6 +340,7 @@ namespace fighting_game
             }
         }
 
+        //共通化
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
