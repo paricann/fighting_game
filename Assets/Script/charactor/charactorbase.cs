@@ -4,9 +4,9 @@ namespace fighting_game
     public class charactorbase : MonoBehaviour
     {
 
-        [SerializeField] protected float   _chSpeed;
-        [SerializeField] protected float   _chStatus;
-        [SerializeField] protected float[] _chPower;
+        [SerializeField] protected float   _chSpeed;             //キャラの移動速度
+        [SerializeField] protected float   _chStatus;            //キャラの体力
+        [SerializeField] protected float[] _chPower;             //キャラの攻撃力[配列で一つずつ管理]
         [SerializeField] protected float   _chjumpForce;
         [SerializeField] protected float   _gravity;
         [SerializeField] protected bool    _isGrounded;
@@ -16,9 +16,21 @@ namespace fighting_game
 
         protected SpriteRenderer _sprite;
         protected Rigidbody2D    _rb;
-        protected Collider2D     _hitColi;
+        protected Collider2D     _hitCharcter;
         protected Animator _animator;
+        public LayerMask _layerMask;
         protected hp_sc _hp;
+
+        protected virtual void Start()
+        {
+            //体力の初期化
+            _chStatus = 100;
+            
+            //componentの取得
+            _rb = GetComponent<Rigidbody2D>();   
+            _animator = GetComponent<Animator>(); 
+           
+        }
 
         /// <summary> /// hp_scへ体力受け渡し/// </summary>
         /// <returns>最大体力</returns>
@@ -26,15 +38,6 @@ namespace fighting_game
         {
             float _maxHelth = _chStatus;
             return _maxHelth;
-        }
-
-        protected virtual void Start()
-        {
-            //体力の初期化
-            //componentの取得
-            _rb = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>(); 
-            //_Chpowerの初期化
         }
 
         protected virtual void Update() 

@@ -39,7 +39,7 @@ namespace fighting_game
             Debug.Log(curentenehelth);
             foreach (float dmg in dmgs)
             {
-                curenthelth -= dmg;
+                curentenehelth -= dmg;
             }
             UpdateenehelthUI();
         }
