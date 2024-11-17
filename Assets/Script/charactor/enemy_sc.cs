@@ -9,6 +9,7 @@ namespace fighting_game
     {
         
         [SerializeField] private float _atackDistance;   //攻撃距離
+        [SerializeField] private float _retreatHealthThreshold; // 遠ざかるための体力閾値
 
         public Player_sc _plSc;
         public Collider2D[] _hitPlayer;
@@ -84,36 +85,61 @@ namespace fighting_game
         protected override void Move()
         {
             base.Move();
-            float x = Random.Range(-1f,1f);
-            if (Mathf.Abs(x) < 0.1f) x = 0f;
-            if (_storeRandom < 90f)
+            float _distance = Vector3.Distance(transform.position, _plSc.transform.position);
+            
+            if(_chStatus <= _retreatHealthThreshold)
             {
-                if (_plSc.transform.position.x < this.transform.position.x)
-                {
-                    _rb.velocity = new Vector2(x * _chSpeed,_rb.velocity.y);
-                }
-                else
-                {
-                    _rb.velocity = new Vector2(x * _chSpeed, _rb.velocity.y);
-                }
+                Retreat();
             }
             else
             {
-                if(_plSc.transform.position.x < this.transform.position.x)
+                //攻撃範囲外
+                if (_distance > _atackDistance)
                 {
-                    x = 1f;
+                    MoveToward();
                 }
                 else
                 {
-                    x = 1f;
+                    StopMove();
                 }
-                _rb.velocity = new Vector2(x * _chSpeed, _rb.velocity.y);
             }
-
-            if (x < 0f) transform.localScale = new Vector3(-1, 1, 1);
-            if (x > 0f) transform.localScale = new Vector3(1, 1, 1);
             
+
+            // プレイヤーの方向に向けてスケールを変更
+            if (_rb.velocity.x < 0)
+                transform.localScale = new Vector3(-1, 1, 1); // 左向き
+            else if (_rb.velocity.x > 0)
+                transform.localScale = new Vector3(1, 1, 1);  // 右向き
             //アニメーターの処理
+        }
+
+        /// <summary> /// プレイヤー接近 /// </summary>
+        private void MoveToward()
+        {
+            float _moveDirection = _plSc.transform.position.x > transform.position.x ? 1f : -1f;
+            _rb .velocity = new Vector2(_moveDirection * _chSpeed, _rb.velocity.y);
+
+            // プレイヤーの方向に向けてスケールを変更
+            if (_rb.velocity.x < 0)
+                transform.localScale = new Vector3(-1, 1, 1); // 左向き
+            else if (_rb.velocity.x > 0)
+                transform.localScale = new Vector3(1, 1, 1);  // 右向き
+        }
+
+        /// <summary>　/// 止まる処理　/// </summary>
+        private void StopMove()
+        {
+            _rb.velocity = Vector2.zero;
+        }
+
+        /// <summary> /// プレイヤーから遠ざかる /// </summary> 
+        private void Retreat()
+        {
+            float _moveDirection = _plSc.transform.position.x > transform.position.x ? -1f : 1f;
+            _rb.velocity = new Vector2(_moveDirection * _chSpeed, _rb.velocity.y);
+            // プレイヤーの方向に向けてスケールを変更 
+            if (_rb.velocity.x < 0) transform.localScale = new Vector3(-1, 1, 1); // 左向き
+            else if (_rb.velocity.x > 0) transform.localScale = new Vector3(1, 1, 1); // 右向き
         }
 
         /// <summary> /// 攻撃処理 /// </summary>
