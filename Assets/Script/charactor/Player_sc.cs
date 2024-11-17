@@ -9,18 +9,19 @@ namespace fighting_game
         protected override void Update()
         {
             base.Update();
+            Debug.Log("tamesi");
         }
 
-        /// <summary> /// ˆÚ“®ˆ— /// </summary>
+        /// <summary> /// Ë†Ãšâ€œÂ®ÂË†â€”Â /// </summary>
         protected override void Move()
         {
             base.Move();
             float _move;
             _move = 0f;
 
-            //'A'ƒL[‚Å¶‚ÉˆÚ“®
+            //'A'Æ’LÂ[â€šÃ…ÂÂ¶â€šÃ‰Ë†Ãšâ€œÂ®
             if (Input.GetKey(KeyCode.A)) { _move = -1f; }
-            // 'D' ƒL[‚Å‰E‚ÉˆÚ“®
+            // 'D' Æ’LÂ[â€šÃ…â€°Eâ€šÃ‰Ë†Ãšâ€œÂ®
             if (Input.GetKey(KeyCode.D)) { _move = 1f;  }
 
             if (Mathf.Abs(_move) < 0.1f) { _move = 0f;  }
@@ -28,27 +29,28 @@ namespace fighting_game
             if (_move < 0f) { transform.localScale = new Vector2(-1, 1);}
             if (_move > 0f) { transform.localScale = new Vector2(1, 1); }
 
-             //animator‚Ìˆ—
+             //animatorâ€šÃŒÂË†â€”Â
 
             _rb.velocity = new Vector2(_move * _chSpeed, _rb.velocity.y);
         }
 
 
-        /// <summary> /// UŒ‚ˆ— /// </summary>
+
+        /// <summary> /// ÂUÅ’â€šÂË†â€”Â /// </summary>
         protected override void Atack()
         {
-            Debug.Log("UŒ‚‚µ‚Ä‚¢‚é‚æ");
+            Debug.Log("ÂUÅ’â€šâ€šÂµâ€šÃ„â€šÂ¢â€šÃ©â€šÃ¦");
             _hitEnemys = Physics2D.OverlapCircleAll(_atackPoint.position,_atackradius);
             foreach(Collider2D hitenemy in _hitEnemys)
             {
-                Debug.Log(hitenemy.gameObject.name + "‚ÉUŒ‚");
-                //“G‚Ö‚ÌUŒ‚iƒ_ƒ[ƒWˆ—j
+                Debug.Log(hitenemy.gameObject.name + "â€šÃ‰ÂUÅ’â€š");
+                //â€œGâ€šÃ–â€šÃŒÂUÅ’â€šÂiÆ’_Æ’ÂÂ[Æ’WÂË†â€”ÂÂj
                 //hitenemy.GetComponent<Enemy>().ENEdame();
             }
         }
 
 
-        /// <summary> /// –hŒäˆ— /// </summary>
+        /// <summary> /// â€“hÅ’Ã¤ÂË†â€”Â /// </summary>
         /// /// <param name="_powers"></param>
         protected override void Defense(float[] _powers)
         {
@@ -57,11 +59,11 @@ namespace fighting_game
 
         protected override void Jump()
         {
-            //wƒL[“ü—Í‚ÅƒWƒƒƒ“ƒvi’n–Ê‚É‚Â‚¢‚Ä‚¢‚éŠÔj
-            if (Input.GetKey(KeyCode.W) && _isGrounded) // ’n–Ê‚É‚¢‚é‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+            //wÆ’LÂ[â€œÃ¼â€”Ãâ€šÃ…Æ’WÆ’Æ’Æ’â€œÆ’vÂiâ€™nâ€“ÃŠâ€šÃ‰â€šÃ‚â€šÂ¢â€šÃ„â€šÂ¢â€šÃ©Å Ã”Âj
+            if (Input.GetKey(KeyCode.W) && _isGrounded) // â€™nâ€“ÃŠâ€šÃ‰â€šÂ¢â€šÃ©â€šÂ©â€šÃ‡â€šÂ¤â€šÂ©â€šÃ°Æ’`Æ’FÆ’bÆ’N
             {
-                Debug.Log($"{_isGrounded} ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚éB");
-                _rb.velocity = new Vector2(_rb.velocity.x, _chjumpForce); // ƒWƒƒƒ“ƒv—Í‚ğİ’è
+                Debug.Log($"{_isGrounded} Æ’tÆ’â€°Æ’Oâ€šÂªâ€”Â§â€šÃâ€šÃ„â€šÂ¢â€šÃ©ÂB");
+                _rb.velocity = new Vector2(_rb.velocity.x, _chjumpForce); // Æ’WÆ’Æ’Æ’â€œÆ’vâ€”Ãâ€šÃ°ÂÃâ€™Ã¨
             }
 
         }
@@ -69,9 +71,10 @@ namespace fighting_game
         protected override void Dead()
         {
             
-            //animator‚Ìˆ—
-            Debug.Log("€–S‚µ‚Ü‚µ‚½B");
+            //animatorâ€šÃŒÂË†â€”Â
+            Debug.Log("Å½â‚¬â€“Sâ€šÂµâ€šÃœâ€šÂµâ€šÂ½ÂB");
 
         }
+
     }
 }
