@@ -45,8 +45,8 @@ namespace fighting_game
             Adjust();
             Move();
             Jump();
-            Defense(_chPower);
-            Damage(_chPower);
+            //Defense(_chPower);
+            //Damage(_chPower);
         }
 
         /// <summary> /// 画面外に出さない処理 /// </summary>

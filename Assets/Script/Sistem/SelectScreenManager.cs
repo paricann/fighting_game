@@ -20,7 +20,7 @@ public class SelectScreenManager : MonoBehaviour
     bool loadlebel;
     public bool bothPlayerSelected;
 
-    public CharacterManager _chManager;
+    private CharacterManager _chManager;
 
     /// <summary>　/// singleton　/// </summary>
     public static SelectScreenManager instance;
@@ -75,7 +75,7 @@ public class SelectScreenManager : MonoBehaviour
                     plIF[i].playerBase = _chManager.Players[i];
                     HandleSelectionPosition(plIF[i]);
                     HandleSelectScreenInput(plIF[i], _chManager.Players[i].inputId);
-                    HandleCharacterPrevew(plIF[i]);
+                   // HandleCharacterPrevew(plIF[i]);
                 }
                 else
                 {
@@ -83,7 +83,7 @@ public class SelectScreenManager : MonoBehaviour
                 }
             }
         }
-
+        //条件文(プレイヤー選択完了したか)
         if (bothPlayerSelected)
         {
             Debug.Log("次の画面へ");
@@ -99,6 +99,8 @@ public class SelectScreenManager : MonoBehaviour
         }
     }
 
+    /// <summary>　/// gameSceneへ遷移　/// </summary>
+    /// <returns></returns>
     IEnumerator LoadLevel()
     {
         for(int i = 0; i < _chManager.Players.Count; i++)
@@ -110,9 +112,12 @@ public class SelectScreenManager : MonoBehaviour
         }
         yield return new WaitForSeconds(2);
         //画面遷移処理
-        //SceneManager.LoadSceneAsync("level", LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync("testSCENE", LoadSceneMode.Single);
     }
 
+    /// <summary> /// セレクター移動 /// </summary>
+    /// <param name="pl"></param>
+    /// <param name="playerId"></param>
     private void HandleSelectScreenInput(PlayerInterface pl,string playerId)
     {
         float y = Input.GetAxis("Vertical" + playerId);
@@ -165,7 +170,7 @@ public class SelectScreenManager : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonUp("Fire1" + playerId))
+        if(Input.GetKey(KeyCode.Return))
         {
             //TODOアニメーターを取得してcreatedCharacterに代入処理
             pl.playerBase.playerPrefab = _chManager.returncharacterWithID(pl.activePotrait.characterID).Prefab;
@@ -173,6 +178,10 @@ public class SelectScreenManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// セレクト位置
+    /// </summary>
+    /// <param name="pl"></param>
     private void HandleSelectionPosition(PlayerInterface pl)
     {
         pl.selector.SetActive(true);
@@ -184,6 +193,10 @@ public class SelectScreenManager : MonoBehaviour
         pl.selector.transform.localPosition = selectedPosition;
     }
 
+    /// <summary>
+    /// セレクトしたキャラクターをプレビューに生成
+    /// </summary>
+    /// <param name="pl"></param>
     private void HandleCharacterPrevew(PlayerInterface pl)
     {
         GameObject go = Instantiate(
@@ -193,7 +206,7 @@ public class SelectScreenManager : MonoBehaviour
 
         pl.createdCharacter = go;
 
-        pl.preiewPotrait =pl.activePotrait;
+        pl.preiewPotrait = pl.activePotrait;
 
         
     }
@@ -216,6 +229,8 @@ public class SelectScreenManager : MonoBehaviour
 
         public PlayerBase playerBase;
     }
+
+    
 }
 
 

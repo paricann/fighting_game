@@ -12,16 +12,16 @@ namespace fighting_game
             Debug.Log("tamesi");
         }
 
-        /// <summary> /// ˆÚ“®ˆ— /// </summary>
+        /// <summary> /// プレイヤーの動き/// </summary>
         protected override void Move()
         {
             base.Move();
             float _move;
             _move = 0f;
 
-            //'A'ƒL[‚Å¶‚ÉˆÚ“®
+            //'A'で左移動
             if (Input.GetKey(KeyCode.A)) { _move = -1f; }
-            // 'D' ƒL[‚Å‰E‚ÉˆÚ“®
+            // 'D' で右移動
             if (Input.GetKey(KeyCode.D)) { _move = 1f;  }
 
             if (Mathf.Abs(_move) < 0.1f) { _move = 0f;  }
@@ -36,21 +36,21 @@ namespace fighting_game
 
 
 
-        /// <summary> /// UŒ‚ˆ— /// </summary>
+        /// <summary> /// 攻撃処理　/// </summary>
         protected override void Atack()
         {
-            Debug.Log("UŒ‚‚µ‚Ä‚¢‚é‚æ");
+            Debug.Log("攻撃しているよ");
             _hitEnemys = Physics2D.OverlapCircleAll(_atackPoint.position,_atackradius);
             foreach(Collider2D hitenemy in _hitEnemys)
             {
-                Debug.Log(hitenemy.gameObject.name + "‚ÉUŒ‚");
-                //“G‚Ö‚ÌUŒ‚iƒ_ƒ[ƒWˆ—j
+                Debug.Log(hitenemy.gameObject.name + "攻撃しているよ");
+                //ダメージ処理
                 //hitenemy.GetComponent<Enemy>().ENEdame();
             }
         }
 
 
-        /// <summary> /// –hŒäˆ— /// </summary>
+        /// <summary> /// 防御処理/// </summary>
         /// /// <param name="_powers"></param>
         protected override void Defense(float[] _powers)
         {
@@ -59,11 +59,11 @@ namespace fighting_game
 
         protected override void Jump()
         {
-            //wƒL[“ü—Í‚ÅƒWƒƒƒ“ƒvi’n–Ê‚É‚Â‚¢‚Ä‚¢‚éŠÔj
-            if (Input.GetKey(KeyCode.W) && _isGrounded) // ’n–Ê‚É‚¢‚é‚©‚Ç‚¤‚©‚ðƒ`ƒFƒbƒN
+            //地面についているときにWキー入力
+            if (Input.GetKey(KeyCode.W) && _isGrounded) 
             {
                 Debug.Log($"{_isGrounded} ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚éB");
-                _rb.velocity = new Vector2(_rb.velocity.x, _chjumpForce); // ƒWƒƒƒ“ƒv—Í‚ðÝ’è
+                _rb.velocity = new Vector2(_rb.velocity.x, _chjumpForce);
             }
 
         }
@@ -71,8 +71,8 @@ namespace fighting_game
         protected override void Dead()
         {
             
-            //animator‚Ìˆ—
-            Debug.Log("Ž€–S‚µ‚Ü‚µ‚½B");
+            //アニメーターの処理
+            Debug.Log("死亡しました");
 
         }
 

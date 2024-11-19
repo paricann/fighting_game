@@ -47,6 +47,13 @@ public class CharacterManager : MonoBehaviour
         public bool hasCharactoer;
         public GameObject playerPrefab;
         public int score;
+        public PLAYER_TYPE _plType;
+
+        public enum PLAYER_TYPE
+        {
+            USER,
+            AI,
+        }
     }
 
 }
