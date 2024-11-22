@@ -1,2 +1,3 @@
 # fighting_game
- 勉強用です。
+ 勉強中です。
+I'm still studying now.
