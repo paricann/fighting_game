@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -12,15 +10,15 @@ namespace fighting_game
     public class TitleManager : MonoBehaviour
     {
         [SerializeField] private Button _button;
-        private float _timer;
         private bool _loadlevel;
-
         public int activeElement;
 
         private void Start()
         {
+            Debug.Log("処理が通っている。");
             StartCoroutine(ForceSelect());
         }
+
 
         private IEnumerator ForceSelect()
         {
@@ -28,12 +26,14 @@ namespace fighting_game
             EventSystem.current.SetSelectedGameObject(_button.gameObject);
         }
 
+        /// <summary> /// single_mode /// </summary>
         public void Single()
         {
             activeElement = 0;
             OnCheck();
         }
 
+        /// <summary> /// ２player_mode /// </summary>
         public void Double()
         {
             activeElement = 1;
@@ -67,10 +67,6 @@ namespace fighting_game
             yield return new WaitForSeconds(1.5f);
             SceneManager.LoadSceneAsync("SelectScene", LoadSceneMode.Single);
         }
-
-
     }
-
-
 }
 
