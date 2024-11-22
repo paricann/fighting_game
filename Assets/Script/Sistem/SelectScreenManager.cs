@@ -10,19 +10,19 @@ public class SelectScreenManager : MonoBehaviour
 {
     public int numberOfPlayers = 1;
     public List<PlayerInterface> plIF = new List<PlayerInterface>();
-    public PotraitInfo[] potraitPrefabs;  //ƒLƒƒƒ‰ƒNƒ^[‚ÌƒCƒ[ƒWiÑ‘œ‰æ“I‚È“zj
+    public PotraitInfo[] potraitPrefabs;  //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ï¼ˆè‚–åƒç”»çš„ãªå¥´ï¼‰
     public int maxX;
     public int maxY;
-    PotraitInfo[,] potraitGrid;           //select‰æ–Ê‚Å‘I‘ğ‚Ég—p‚·‚é‚½‚ß‚ÌGrid
+    PotraitInfo[,] potraitGrid;           //selectç”»é¢ã§é¸æŠã«ä½¿ç”¨ã™ã‚‹ãŸã‚ã®Grid
 
-    public GameObject potraitCanvas;      //‚·‚×‚Ä‚ÌƒLƒƒƒ‰ƒNƒ^[image‚ğŠ—L
+    public GameObject potraitCanvas;      //ã™ã¹ã¦ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼imageã‚’æ‰€æœ‰
 
     bool loadlebel;
     public bool bothPlayerSelected;
 
     private CharacterManager _chManager;
 
-    /// <summary>@/// singleton@/// </summary>
+    /// <summary>ã€€/// singletonã€€/// </summary>
     public static SelectScreenManager instance;
     public static SelectScreenManager GetInstance()
     {
@@ -83,10 +83,10 @@ public class SelectScreenManager : MonoBehaviour
                 }
             }
         }
-        //ğŒ•¶(ƒvƒŒƒCƒ„[‘I‘ğŠ®—¹‚µ‚½‚©)
+        //æ¡ä»¶æ–‡(ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼é¸æŠå®Œäº†ã—ãŸã‹)
         if (bothPlayerSelected)
         {
-            Debug.Log("Ÿ‚Ì‰æ–Ê‚Ö");
+            Debug.Log("æ¬¡ã®ç”»é¢ã¸");
             StartCoroutine(LoadLevel());
             loadlebel = true;
         }
@@ -99,7 +99,7 @@ public class SelectScreenManager : MonoBehaviour
         }
     }
 
-    /// <summary>@/// gameScene‚Ö‘JˆÚ@/// </summary>
+    /// <summary>ã€€/// gameSceneã¸é·ç§»ã€€/// </summary>
     /// <returns></returns>
     IEnumerator LoadLevel()
     {
@@ -108,14 +108,14 @@ public class SelectScreenManager : MonoBehaviour
             int _ranValue = Random.Range(0, potraitPrefabs.Length);
             _chManager.Players[i].playerPrefab = 
                 _chManager.returncharacterWithID(potraitPrefabs[_ranValue].characterID).Prefab;
-            Debug.Log(potraitPrefabs[_ranValue].characterID +"AIƒLƒƒƒ‰‘I‘ğI");
+            Debug.Log(potraitPrefabs[_ranValue].characterID +"AIã‚­ãƒ£ãƒ©é¸æŠï¼");
         }
         yield return new WaitForSeconds(2);
-        //‰æ–Ê‘JˆÚˆ—
+        //ç”»é¢é·ç§»å‡¦ç†
         SceneManager.LoadSceneAsync("testSCENE", LoadSceneMode.Single);
     }
 
-    /// <summary> /// ƒZƒŒƒNƒ^[ˆÚ“® /// </summary>
+    /// <summary> /// ã‚»ãƒ¬ã‚¯ã‚¿ãƒ¼ç§»å‹• /// </summary>
     /// <param name="pl"></param>
     /// <param name="playerId"></param>
     private void HandleSelectScreenInput(PlayerInterface pl,string playerId)
@@ -172,14 +172,14 @@ public class SelectScreenManager : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Return))
         {
-            //TODOƒAƒjƒ[ƒ^[‚ğæ“¾‚µ‚ÄcreatedCharacter‚É‘ã“üˆ—
+            //TODOã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’å–å¾—ã—ã¦createdCharacterã«ä»£å…¥å‡¦ç†
             pl.playerBase.playerPrefab = _chManager.returncharacterWithID(pl.activePotrait.characterID).Prefab;
             pl.playerBase.hasCharactoer = true;
         }
     }
 
     /// <summary>
-    /// ƒZƒŒƒNƒgˆÊ’u
+    /// ã‚»ãƒ¬ã‚¯ãƒˆä½ç½®
     /// </summary>
     /// <param name="pl"></param>
     private void HandleSelectionPosition(PlayerInterface pl)
@@ -194,7 +194,7 @@ public class SelectScreenManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒZƒŒƒNƒg‚µ‚½ƒLƒƒƒ‰ƒNƒ^[‚ğƒvƒŒƒrƒ…[‚É¶¬
+    /// ã‚»ãƒ¬ã‚¯ãƒˆã—ãŸã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚’ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã«ç”Ÿæˆ
     /// </summary>
     /// <param name="pl"></param>
     private void HandleCharacterPrevew(PlayerInterface pl)
@@ -207,7 +207,6 @@ public class SelectScreenManager : MonoBehaviour
         pl.createdCharacter = go;
 
         pl.preiewPotrait = pl.activePotrait;
-
         
     }
 
@@ -215,18 +214,15 @@ public class SelectScreenManager : MonoBehaviour
     [System.Serializable]
     public class PlayerInterface
     {
-        public PotraitInfo activePotrait;   //Œ»İ‘I‚ñ‚Å‚¢‚éƒLƒƒƒ‰‰æ‘œ
+        public PotraitInfo activePotrait;   //ç¾åœ¨é¸ã‚“ã§ã„ã‚‹ã‚­ãƒ£ãƒ©ç”»åƒ
         public PotraitInfo preiewPotrait;
-        public GameObject selector;        //ƒ|ƒWƒVƒ‡ƒ“‘I‘ğ—pƒIƒuƒWƒF
-        public Transform charVisPos;      //player1‚Ì‘I‚ñ‚Å‚¢‚éƒLƒƒƒ‰‚Ìposition
+        public GameObject selector;        //ãƒã‚¸ã‚·ãƒ§ãƒ³é¸æŠç”¨ã‚ªãƒ–ã‚¸ã‚§
+        public Transform charVisPos;      //player1ã®é¸ã‚“ã§ã„ã‚‹ã‚­ãƒ£ãƒ©ã®position
         public GameObject createdCharacter;
-
-        public int activeX; //player1‚ÌƒGƒ“ƒgƒŠƒAƒNƒeƒBƒu
+        public int activeX; //player1ã®ã‚¨ãƒ³ãƒˆãƒªã‚¢ã‚¯ãƒ†ã‚£ãƒ–
         public int activeY;
-
         public bool hitInputOnce;
         public float timerToReset;
-
         public PlayerBase playerBase;
     }
 

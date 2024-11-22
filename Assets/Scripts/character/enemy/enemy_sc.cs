@@ -8,17 +8,17 @@ namespace fighting_game
     public class enemy_sc : charactorbase
     {
         
-        [SerializeField] private float _atackDistance;   //UŒ‚‹——£
-        [SerializeField] private float _retreatHealthThreshold; // ‰“‚´‚©‚é‚½‚ß‚Ì‘Ì—Íè‡’l
+        [SerializeField] private float _atackDistance;   //æ”»æ’ƒè·é›¢
+        [SerializeField] private float _retreatHealthThreshold; // é ã–ã‹ã‚‹ãŸã‚ã®ä½“åŠ›é–¾å€¤
 
         public Player_sc _plSc;
         public Collider2D[] _hitPlayer;
 
-        private bool initiateAI;                          //“G‚ª“®‚­‚©“®‚©‚È‚¢‚©‚Ì”»’è—pƒtƒ‰ƒO
-        private bool closecombat;                         //“G‚ªƒvƒŒƒCƒ„[‚ğUŒ‚‚·‚é‚©‚µ‚È‚¢‚Ì‚©”»’è—pƒtƒ‰ƒO   
-        private bool _gotRandom;                           //ƒtƒŒ[ƒ€(s“®)‚²‚Æ‚É—”‚ğXV‚µ‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚ÌŠÇ—ƒtƒ‰ƒO
+        private bool initiateAI;                          //æ•µãŒå‹•ãã‹å‹•ã‹ãªã„ã‹ã®åˆ¤å®šç”¨ãƒ•ãƒ©ã‚°
+        private bool closecombat;                         //æ•µãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ”»æ’ƒã™ã‚‹ã‹ã—ãªã„ã®ã‹åˆ¤å®šç”¨ãƒ•ãƒ©ã‚°   
+        private bool _gotRandom;                           //ãƒ•ãƒ¬ãƒ¼ãƒ (è¡Œå‹•)ã”ã¨ã«ä¹±æ•°ã‚’æ›´æ–°ã—ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã®ç®¡ç†ãƒ•ãƒ©ã‚°
 
-        private float _storeRandom;                        //•‚“®¬”“_Œ^‚Ìƒ‰ƒ“ƒ_ƒ€‚È’l‚ğæ“¾‚·‚é‚½‚ß‚Ì•Ï”
+        private float _storeRandom;                        //æµ®å‹•å°æ•°ç‚¹å‹ã®ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’å–å¾—ã™ã‚‹ãŸã‚ã®å¤‰æ•°
         private float _clTimer;
         private float _aiTimer;
         private float _nrRate = 1;
@@ -26,10 +26,10 @@ namespace fighting_game
 
         public float _ChangeStateTorance = 3;
         public float _closeRate = 0.5f;
-        public float _aiStateLife = 1;                     //‚Ç‚Ì‚­‚ç‚¢‚ÅzŠÂ‚·‚é‚©‚ğ‚Ç‚Ì‚­‚ç‚¢‚ÅŒˆ’è‚·‚é‚©
+        public float _aiStateLife = 1;                     //ã©ã®ãã‚‰ã„ã§å¾ªç’°ã™ã‚‹ã‹ã‚’ã©ã®ãã‚‰ã„ã§æ±ºå®šã™ã‚‹ã‹
 
         [Header("atack")]
-        private bool  _atackmove = false;                   //UŒ‚”»’è—pƒtƒ‰ƒO
+        private bool  _atackmove = false;                   //æ”»æ’ƒåˆ¤å®šç”¨ãƒ•ãƒ©ã‚°
         private float _atackrandom;
 
         [Header("move")]
@@ -37,11 +37,10 @@ namespace fighting_game
 
         public enum STATE
         {
-            CLOSE_STATE, //‹——£‚ª‹ß‚¢ê‡
-            NOMAL_STATE, //’Êí
-            RESET,       //ó‘ÔƒŠƒZƒbƒg
-
-            ZERO,        //‚È‚ñ‚à‚È‚µ
+            CLOSE_STATE, //è·é›¢ãŒè¿‘ã„å ´åˆ
+            NOMAL_STATE, //é€šå¸¸æ™‚
+            RESET,       //çŠ¶æ…‹ãƒªã‚»ãƒƒãƒˆ
+            ZERO,        //ãªã‚“ã‚‚ãªã—
         }
 
         public STATE _state;
@@ -58,9 +57,8 @@ namespace fighting_game
         {
             if(initiateAI)
             {
-                //ƒGƒlƒ~[‚Ì‰Šúó‘Ô
+                //ã‚¨ãƒãƒŸãƒ¼ã®åˆæœŸçŠ¶æ…‹
                 _state = STATE.RESET;
-                float multiplier = 0;
                 if(!_gotRandom)
                 {
                     _storeRandom = ReturnRandom();
@@ -81,7 +79,7 @@ namespace fighting_game
             }
         }
 
-        /// <summary> /// ˆÚ“®ˆ— /// </summary>
+        /// <summary> /// ç§»å‹•å‡¦ç† /// </summary>
         protected override void Move()
         {
             base.Move();
@@ -93,7 +91,7 @@ namespace fighting_game
             }
             else
             {
-                //UŒ‚”ÍˆÍŠO
+                //æ”»æ’ƒç¯„å›²å¤–
                 if (_distance > _atackDistance)
                 {
                     MoveToward();
@@ -104,45 +102,44 @@ namespace fighting_game
                 }
             }
             
-
-            // ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ÉŒü‚¯‚ÄƒXƒP[ƒ‹‚ğ•ÏX
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã«å‘ã‘ã¦ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¤‰æ›´
             if (_rb.velocity.x < 0)
-                transform.localScale = new Vector3(-1, 1, 1); // ¶Œü‚«
+                transform.localScale = new Vector3(-1, 1, 1); // å·¦å‘ã
             else if (_rb.velocity.x > 0)
-                transform.localScale = new Vector3(1, 1, 1);  // ‰EŒü‚«
-            //ƒAƒjƒ[ƒ^[‚Ìˆ—
+                transform.localScale = new Vector3(1, 1, 1);  // å³å‘ã
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®å‡¦ç†
         }
 
-        /// <summary> /// ƒvƒŒƒCƒ„[Ú‹ß /// </summary>
+        /// <summary> /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ¥è¿‘ /// </summary>
         private void MoveToward()
         {
             float _moveDirection = _plSc.transform.position.x > transform.position.x ? 1f : -1f;
             _rb .velocity = new Vector2(_moveDirection * _chSpeed, _rb.velocity.y);
 
-            // ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ÉŒü‚¯‚ÄƒXƒP[ƒ‹‚ğ•ÏX
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã«å‘ã‘ã¦ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¤‰æ›´
             if (_rb.velocity.x < 0)
-                transform.localScale = new Vector3(-1, 1, 1); // ¶Œü‚«
+                transform.localScale = new Vector3(-1, 1, 1); // å·¦å‘ã
             else if (_rb.velocity.x > 0)
-                transform.localScale = new Vector3(1, 1, 1);  // ‰EŒü‚«
+                transform.localScale = new Vector3(1, 1, 1);  // å³å‘ã
         }
 
-        /// <summary>@/// ~‚Ü‚éˆ—@/// </summary>
+        /// <summary>ã€€/// æ­¢ã¾ã‚‹å‡¦ç†ã€€/// </summary>
         private void StopMove()
         {
             _rb.velocity = Vector2.zero;
         }
 
-        /// <summary> /// ƒvƒŒƒCƒ„[‚©‚ç‰“‚´‚©‚é /// </summary> 
+        /// <summary> /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰é ã–ã‹ã‚‹ /// </summary> 
         private void Retreat()
         {
             float _moveDirection = _plSc.transform.position.x > transform.position.x ? -1f : 1f;
             _rb.velocity = new Vector2(_moveDirection * _chSpeed, _rb.velocity.y);
-            // ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ÉŒü‚¯‚ÄƒXƒP[ƒ‹‚ğ•ÏX 
-            if (_rb.velocity.x < 0) transform.localScale = new Vector3(-1, 1, 1); // ¶Œü‚«
-            else if (_rb.velocity.x > 0) transform.localScale = new Vector3(1, 1, 1); // ‰EŒü‚«
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã«å‘ã‘ã¦ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¤‰æ›´ 
+            if (_rb.velocity.x < 0) transform.localScale = new Vector3(-1, 1, 1); // å·¦å‘ã
+            else if (_rb.velocity.x > 0) transform.localScale = new Vector3(1, 1, 1); // å³å‘ã
         }
 
-        /// <summary> /// UŒ‚ˆ— /// </summary>
+        /// <summary> /// æ”»æ’ƒå‡¦ç† /// </summary>
         protected override void Atack()
         {
             base.Atack();
@@ -159,47 +156,47 @@ namespace fighting_game
                 _atackmove = true;
                 if (_atackmove)
                 {
-                    //TODOƒAƒjƒ[ƒVƒ‡ƒ“ˆ—
+                    //TODOã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å‡¦ç†
                     _hitPlayer = Physics2D.OverlapCircleAll(_atackPoint.position, _atackradius, _layerMask);
                     foreach (Collider2D hitplayer in _hitPlayer)
                     {
-                        Debug.Log(hitplayer.gameObject.name + "‚ÉUŒ‚III");
-                        //hitplayer.GetComponent<Playercon>().Playerdame(_chPower); //ƒGƒ‰[‚ªo‚Ä‚¢‚é‚½‚ßˆê’UƒXƒ‹[
+                        Debug.Log(hitplayer.gameObject.name + "ã«æ”»æ’ƒï¼ï¼ï¼");
+                        //hitplayer.GetComponent<Playercon>().Playerdame(_chPower); //ã‚¨ãƒ©ãƒ¼ãŒå‡ºã¦ã„ã‚‹ãŸã‚ä¸€æ—¦ã‚¹ãƒ«ãƒ¼
                     }
                 }
             }
             else if(_atackrandom < 30)
             {
-                //UŒ‚ˆ—‚Q
+                //æ”»æ’ƒå‡¦ç†ï¼’
             }
             else if( 50 >_atackrandom && _atackrandom > 30)
             {
-                //UŒ‚ˆ—3
+                //æ”»æ’ƒå‡¦ç†3
             }
-            //ƒAƒjƒ[ƒ^[ƒŠƒZƒbƒgˆ—
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ãƒªã‚»ãƒƒãƒˆå‡¦ç†
             
         }
 
-        /// <summary> /// ƒWƒƒƒ“ƒvˆ— /// </summary>
+        /// <summary> /// ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç† /// </summary>
         protected override void Jump()
         {
             base.Jump();
         }
 
-        /// <summary> /// –hŒäˆ— /// </summary>
+        /// <summary> /// é˜²å¾¡å‡¦ç† /// </summary>
         /// <param name="_powers"></param>
         protected override void Defense(float[] _powers)
         {
             base.Defense(_powers);
         }
 
-        /// <summary> /// €–Sˆ— /// </summary>
+        /// <summary> /// æ­»äº¡å‡¦ç† /// </summary>
         protected override void Dead()
         {
             base.Dead();
         }
 
-        /// <summary> /// ƒ‰ƒ“ƒ_ƒ€‚È’l‚ğæ“¾‚µ‚Ä•Ô‚· /// </summary>
+        /// <summary> /// ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’å–å¾—ã—ã¦è¿”ã™ /// </summary>
         /// <returns></returns>
         private float ReturnRandom()
         {
@@ -207,7 +204,7 @@ namespace fighting_game
             return retval;
         }
 
-        /// <summary> /// ‹——£‘ª’è /// </summary>
+        /// <summary> /// è·é›¢æ¸¬å®š /// </summary>
         private void CheckDistance()
         {
             float _distance = Vector3.Distance(transform.position, _plSc.transform.position);
@@ -267,8 +264,7 @@ namespace fighting_game
             }
         }
 
-
-        /// <summary> /// ó‘Ô‘JˆÚ /// </summary>
+        /// <summary> /// çŠ¶æ…‹é·ç§» /// </summary>
         private void State()
         {
             switch (_state)
@@ -285,9 +281,5 @@ namespace fighting_game
 
             }
         }
-
-        
-
-
     }
 }
