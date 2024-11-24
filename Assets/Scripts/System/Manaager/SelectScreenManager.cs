@@ -9,7 +9,7 @@ namespace fighting_game
     {
         public int numberOfPlayers = 1;
         public List<PlayerInterface> plIF = new List<PlayerInterface>();
-        public PotraitInfo[] potraitPrefabs;  //キャラクターのイメージ（肖像画的な奴）
+        public PotraitInfo[] potraitPrefabs;  
         public int maxX;
         public int maxY;
         PotraitInfo[,] potraitGrid;           //select画面で選択に使用するためのGrid
@@ -110,6 +110,7 @@ namespace fighting_game
                 Debug.Log(potraitPrefabs[_ranValue].characterID +"AIキャラ選択！");
             }
             yield return new WaitForSeconds(2);
+
             //画面遷移処理
             SceneManager.LoadSceneAsync("testSCENE", LoadSceneMode.Single);
         }
@@ -214,10 +215,10 @@ namespace fighting_game
         [System.Serializable]
         public class PlayerInterface
         {
-            public PotraitInfo activePotrait;   //現在選んでいるキャラ画像
+            public PotraitInfo activePotrait;  
             public PotraitInfo preiewPotrait;
             public GameObject selector;        //ポジション選択用オブジェ
-            public Transform charVisPos;      //player1の選んでいるキャラのposition
+            public Transform charVisPos;       //選択キャラ表示のポジション
             public GameObject createdCharacter;
 
             public int activeX; //player1のエントリアクティブ

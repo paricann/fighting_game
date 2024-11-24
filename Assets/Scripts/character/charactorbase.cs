@@ -20,24 +20,13 @@ namespace fighting_game
         protected Animator _animator;
         public LayerMask _layerMask;
         protected hp_sc _hp;
+        protected StateManager _stManager;
 
         protected virtual void Start()
-        {
-            //体力の初期化
-            _chStatus = 100;
-            
+        {   
             //componentの取得
             _rb = GetComponent<Rigidbody2D>();   
             _animator = GetComponent<Animator>(); 
-           
-        }
-
-        /// <summary> /// hp_scへ体力受け渡し/// </summary>
-        /// <returns>最大体力</returns>
-        public float Maxhelth()
-        {
-            float _maxHelth = _chStatus;
-            return _maxHelth;
         }
 
         protected virtual void Update() 

@@ -39,6 +39,8 @@ namespace fighting_game
             activeElement = 1;
             OnCheck();
         }
+
+        /// <summary>  /// チェック用関数 /// </summary>
         private void OnCheck()
         {
             Debug.Log("load");
@@ -47,6 +49,7 @@ namespace fighting_game
 
         }
 
+        /// <summary> /// どちらのモードが選択されたか /// </summary>
         private void HandlieSelectedOption()
         {
             switch(activeElement)
@@ -61,6 +64,8 @@ namespace fighting_game
             }
         }
 
+        /// <summary> /// 遷移処理 /// </summary>
+        /// <returns></returns>
         private IEnumerator Loadlevel()
         {
             HandlieSelectedOption();

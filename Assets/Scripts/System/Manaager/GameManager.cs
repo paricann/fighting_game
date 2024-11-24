@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     UIlevel _level;
     Timecount _timeCount;
     Player_sc _pl;
+    hp_sc _hp;
 
     [SerializeField] public int MaxTurns = 2;
     private int _currentTurn = 1;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    /// <summary> /// タイマー表示 /// </summary>
     private void HandleTurnTimer()
     {
         //timeテキスト表示
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
         _level.textLine2.gameObject.SetActive(false);
 
         //timereset
-        _timeCount.ResetTime();
+        //_timeCount.ResetTime();
 
         yield return InitializePlayers();
 
@@ -96,9 +98,18 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i <_chmane.Players.Count; i++)
         {
-            GameObject obj = Instantiate(_chmane.Players[i].playerPrefab,
+            if (i >= spawnPositions.Length)
+            {
+                Debug.LogWarning("Spawn positions not sufficient for the number of players.");
+                break;
+            }
+
+                GameObject obj = Instantiate(_chmane.Players[i].playerPrefab,
                 spawnPositions[i].position,Quaternion.identity)as GameObject;
-           
+
+            _chmane.Players[i].plStatus = obj.GetComponent<StateManager>();
+            _chmane.Players[i].plStatus.helthslider = _level.sliders[i];
+
         }
         yield return new WaitForEndOfFrame();
     }
@@ -109,12 +120,15 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < _chmane.Players.Count; i++)
         {
-            _pl.transform.position = spawnPositions[i].position;
+            _chmane.Players[i].plStatus.status_helth = 100;
+            _chmane.Players[i].plStatus.transform.position = spawnPositions[i].position;
         }
 
         yield return new WaitForEndOfFrame();
     }
 
+    /// <summary> /// ゲーム開始時UI処理 /// </summary>
+    /// <returns></returns>
     IEnumerator EnableControl()
     {
         _level.textLine1.gameObject.SetActive(true);
@@ -148,6 +162,8 @@ public class GameManager : MonoBehaviour
        
     }
 
+    /// <summary> /// ターン終了時UIの処理 /// </summary>
+    /// <param name="timeout"></param>
     public void EndTurnFunction(bool timeout = false)
     {
         _countdown = false;
@@ -170,6 +186,7 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(Endturn());
     }
 
+
     IEnumerator EndTurn()
     {
         yield return oneSec;
@@ -181,10 +198,5 @@ public class GameManager : MonoBehaviour
 
         //if(_player == )
     }
-
-    
-
-
-
 
 }
