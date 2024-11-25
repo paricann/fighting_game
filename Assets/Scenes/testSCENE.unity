@@ -191,6 +191,8 @@ MonoBehaviour:
   sliders:
   - {fileID: 1507928176}
   - {fileID: 1507928175}
+  winindicatorGrid: []
+  wininducator: {fileID: 0}
 --- !u!1 &1277575582
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,21 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class Timecount : MonoBehaviour
+namespace fighting_game
 {
-    private float counttime = 60.0F;
-
-    public int TimeCountdown()
+    public class Timecount : MonoBehaviour
     {
-        // countTimeに、ゲームが開始してからの秒数を格納
-         counttime -= Time.deltaTime;
-        return (int)counttime;
-    }
+        private float _counttime = 60.0F;
+        private float _initialTime = 60.0f;
 
-    public void ResetTime()
-    {
-        counttime = 0.0F;
-    }
+        public int GetRemaingTime()
+        {
+            // countTimeに、ゲームが開始してからの秒数を格納
+            _counttime -= Time.deltaTime;
+            return Mathf.Max((int)_counttime, 0);
+        }
 
-    
+        public void ResetTime()
+        {
+            _counttime = _initialTime;
+        }
+
+        public void SetInitialTime(float time)
+        {
+            _initialTime = time;
+            _counttime =_initialTime;
+        }
+
+
+    }
 }
+

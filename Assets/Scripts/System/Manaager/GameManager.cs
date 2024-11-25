@@ -9,15 +9,17 @@ public class GameManager : MonoBehaviour
     WaitForSeconds oneSec;
     public Transform[] spawnPositions; //キャラクターの生成場所
 
-    CharacterManager _chmane;
+    CharacterManager _chmanager;
     UIlevel _level;
     Timecount _timeCount;
     Player_sc _pl;
     hp_sc _hp;
 
+    /// <summary>　/// 最大ターン数　/// </summary>
     [SerializeField] public int MaxTurns = 2;
     private int _currentTurn = 1;
 
+    /// <summary> /// 最大タイマー /// </summary>
     [SerializeField] public int MaxTimer = 60;
     private float _internalTimer;
     private bool _countdown;
@@ -25,8 +27,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //シングルトン
-        _chmane = CharacterManager.GetInstance();
+        _chmanager = CharacterManager.GetInstance();
         _level = UIlevel.GetInstance();
+        _timeCount = GetComponent<Timecount>();
 
         //onesecを初期化
         oneSec = new WaitForSeconds(1);
@@ -56,12 +59,12 @@ public class GameManager : MonoBehaviour
     private void HandleTurnTimer()
     {
         //timeテキスト表示
-        _level.leveltimer.text = _timeCount.TimeCountdown().ToString();
+        _level.leveltimer.text = _timeCount.GetRemaingTime().ToString();
 
-        if(_timeCount.TimeCountdown() <= 0)
+        if(_timeCount.GetRemaingTime() <= 0)
         {
             //TODOターンを終わらす処理
-            //EndTurnFunction(true);
+            EndTurnFunction(true);
             _countdown = false;
         }
         
@@ -84,7 +87,6 @@ public class GameManager : MonoBehaviour
         _level.textLine1.gameObject.SetActive(false);
         _level.textLine2.gameObject.SetActive(false);
 
-        //timereset
         //_timeCount.ResetTime();
 
         yield return InitializePlayers();
@@ -96,7 +98,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CreatePlayers()
     {
-        for(int i = 0; i <_chmane.Players.Count; i++)
+        for(int i = 0; i <_chmanager.Players.Count; i++)
         {
             if (i >= spawnPositions.Length)
             {
@@ -104,11 +106,11 @@ public class GameManager : MonoBehaviour
                 break;
             }
 
-                GameObject obj = Instantiate(_chmane.Players[i].playerPrefab,
+                GameObject obj = Instantiate(_chmanager.Players[i].playerPrefab,
                 spawnPositions[i].position,Quaternion.identity)as GameObject;
 
-            _chmane.Players[i].plStatus = obj.GetComponent<StateManager>();
-            _chmane.Players[i].plStatus.helthslider = _level.sliders[i];
+            _chmanager.Players[i].plStatus = obj.GetComponent<StateManager>();
+            _chmanager.Players[i].plStatus.helthslider = _level.sliders[i];
 
         }
         yield return new WaitForEndOfFrame();
@@ -118,10 +120,10 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator InitializePlayers()
     {
-        for(int i = 0; i < _chmane.Players.Count; i++)
+        for(int i = 0; i < _chmanager.Players.Count; i++)
         {
-            _chmane.Players[i].plStatus.status_helth = 100;
-            _chmane.Players[i].plStatus.transform.position = spawnPositions[i].position;
+            _chmanager.Players[i].plStatus.status_helth = 100;
+            _chmanager.Players[i].plStatus.transform.position = spawnPositions[i].position;
         }
 
         yield return new WaitForEndOfFrame();

@@ -1041,7 +1041,6 @@ GameObject:
   - component: {fileID: 8350741120759000941}
   - component: {fileID: 2071535999852303783}
   - component: {fileID: 6879631644140322050}
-  - component: {fileID: 3369449421597492343}
   m_Layer: 5
   m_Name: time
   m_TagString: Untagged
@@ -1065,7 +1064,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 39, y: -55}
+  m_AnchoredPosition: {x: 7.1, y: -61.2}
   m_SizeDelta: {x: 84.38, y: 37.74}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2071535999852303783
@@ -1103,22 +1102,10 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 250
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0
---- !u!114 &3369449421597492343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8100233847567478097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 791d90660aa25b24c9a55a96a0b48d2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
