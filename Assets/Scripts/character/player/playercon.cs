@@ -127,19 +127,19 @@ namespace fighting_game
         public void Playerdame(float dmg)
         {
             animator.SetTrigger("dame");
-            _hp.curenthelth -= dmg;
+            //_hp.curenthelth -= (int)dmg;
             _hp.UpdateplayhelthUI();
-            if (_hp.curenthelth <= 0)
-            {
-                Debug.Log("Playerの負け");
-                Playerdead();
-            }
+            //if (_hp.curenthelth <= 0)
+            //{
+            //    Debug.Log("Playerの負け");
+            //    Playerdead();
+            //}
         }
 
         /// <summary>　/// 死亡処理　/// </summary>
         public void Playerdead()
         {
-            _hp.curenthelth = 0;
+            //_hp.curenthelth = 0;
             //playerの死亡処理
             animator.SetBool("dead", true);
             Debug.Log("Playerdie");

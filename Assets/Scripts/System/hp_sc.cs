@@ -5,17 +5,23 @@ namespace fighting_game
 
     public class hp_sc : MonoBehaviour
     {
-        [SerializeField] public Slider slider;
-
-        public charactorbase _chbase;
-        public float curenthelth = 0;
-        public float curentenehelth = 0;
+        CharacterManager _chmane;
+        public UIlevel _level;
+        private  int curenthelth = 0;
+        private  int curentenehelth = 0;
 
         private void Start()
         {
+            _chmane = CharacterManager.GetInstance(); // CharacterManagerを取得
+            _level = UIlevel.GetInstance(); // UIlevelを取得
+
             Debug.Log("ここまで来てるよ");
-            curenthelth = _chbase.Maxhelth();      //初期体力MAX
-            curentenehelth = _chbase.Maxhelth();   //上と同じ
+            for (int i = 0; i < _chmane.Players.Count; i++)
+            {
+                Debug.Log(curenthelth);
+                curenthelth    = _chmane.Players[i].plStatus.status_helth;   //初期体力MAX
+                curentenehelth = _chmane.Players[i].plStatus.status_helth;   //上と同じ
+            }
             UpdateenehelthUI();
             UpdateplayhelthUI();
         }
@@ -27,7 +33,7 @@ namespace fighting_game
             Debug.Log(curenthelth);
             foreach (float dmg in dmgs)
             {
-                curenthelth -= dmg;
+                curenthelth -= (int)dmg;
             }
             UpdateplayhelthUI();
         }
@@ -39,7 +45,7 @@ namespace fighting_game
             Debug.Log(curentenehelth);
             foreach (float dmg in dmgs)
             {
-                curentenehelth -= dmg;
+                curentenehelth -= (int)dmg;
             }
             UpdateenehelthUI();
         }
@@ -48,14 +54,30 @@ namespace fighting_game
         public void UpdateplayhelthUI()
         {
             Debug.Log("playerhelth");
-            slider.value = curenthelth / _chbase.Maxhelth();
+            for (int i = 0; i < _chmane.Players.Count; i++)
+            {
+                if (_level.sliders.Length > 0)
+                {
+                    Debug.Log(curenthelth + "現在の体力");
+                    _level.sliders[0].value = curenthelth / _chmane.Players[i].plStatus.status_helth; // プレイヤーのHPをスライダーに反映
+                }
+            }
+
         }
 
         /// <summary> /// enemyのスライダー増減処理 /// </summary>
         public void UpdateenehelthUI()
         {
             Debug.Log("enehelth");
-            slider.value = curentenehelth / _chbase.Maxhelth();
+            for (int i = 0; i < _chmane.Players.Count; i++)
+            {
+                if (_level.sliders.Length > 1)
+                {
+                    Debug.Log("現在の敵の体力" + curentenehelth);
+                    _level.sliders[1].value = curentenehelth / _chmane.Players[i].plStatus.status_helth; // enemyのHPをスライダーに反映
+                }
+            }
+           
         }
 
     }

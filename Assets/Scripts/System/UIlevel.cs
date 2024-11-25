@@ -10,6 +10,8 @@ namespace fighting_game
         public Text textLine2;
         public Text leveltimer;
 
+        public Slider[] sliders;
+
         public GameObject[] winindicatorGrid;
         public GameObject wininducator;
 
@@ -26,6 +28,7 @@ namespace fighting_game
             instance = this;
         }
 
+        
         /// <summary>
         /// 各プレイヤーの状況知らせ（どちらが勝利したか）
         /// </summary>
@@ -35,6 +38,7 @@ namespace fighting_game
             GameObject obj = Instantiate(wininducator, this.transform.position,Quaternion.identity) as GameObject;
             obj.transform.SetParent(winindicatorGrid[player].transform);
         }
+        
     }
 }
 
