@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 403830392642592944}
   - component: {fileID: 3592960978489886106}
   - component: {fileID: 7961438036436138665}
+  - component: {fileID: 7697115996424487833}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -218,10 +219,23 @@ MonoBehaviour:
     m_Bits: 0
   _atackDistance: 0
   _retreatHealthThreshold: 50
-  _plSc: {fileID: 0}
-  _hitPlayer:
-  - {fileID: 0}
+  _plSc: {fileID: 5534876621805506066, guid: 88ed9b61fb8c9224892a3a996f239a4a, type: 3}
+  _hitPlayer: []
   _ChangeStateTorance: 3
   _closeRate: 0.5
   _aiStateLife: 1
   _state: 0
+--- !u!114 &7697115996424487833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7609394222370904609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148a913c9a0993b4b9469fff867538c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status_helth: 100
+  helthslider: {fileID: 0}

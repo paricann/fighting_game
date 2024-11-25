@@ -105,13 +105,13 @@ namespace fighting_game
         {
             movecheck = false;
             animator.SetTrigger("enedame");
-            _hp.curentenehelth -= dmg;
-            _hp.UpdateenehelthUI();
-            if (_hp.curentenehelth <= 0)
-            {
-                Debug.Log("あなたの負け");
-                Enedie();
-            }
+            //_hp.curentenehelth -= (int)dmg;
+            //_hp.UpdateenehelthUI();
+            //if (_hp.curentenehelth <= 0)
+            //{
+            //    Debug.Log("あなたの負け");
+            //    Enedie();
+            //}
         }
 
 
@@ -119,7 +119,7 @@ namespace fighting_game
         public void Enedie() //enemyの死亡処理
         {
             movecheck = false;
-            _hp.curentenehelth = 0;
+            //_hp.curentenehelth = 0;
             animator.SetTrigger("dead");
         }
 

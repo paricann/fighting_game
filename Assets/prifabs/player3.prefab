@@ -44,8 +44,9 @@ GameObject:
   - component: {fileID: 5375264090434079056}
   - component: {fileID: 2832359360584116905}
   - component: {fileID: 8609671418140283711}
-  - component: {fileID: 4356899653702479651}
   - component: {fileID: 4117377028620856770}
+  - component: {fileID: -7329990075422837471}
+  - component: {fileID: -4422497658242053304}
   m_Layer: 6
   m_Name: player3
   m_TagString: enemy
@@ -108,7 +109,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -812069699
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1360144183, guid: 962da4ebf1677564ba3d47816cbf98a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -214,35 +215,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4356899653702479651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745793057940756041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2512873f6e7ec44aa512531a2cceb3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  atackdistance: 5.08
-  movespead: 5
-  atackpower: 1
-  animator: {fileID: 5375264090434079056}
-  _hp: {fileID: 0}
-  enStates: {fileID: 0}
-  playerlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  hitplayers:
-  - {fileID: 0}
-  eneatackpoint: {fileID: 1357795685003253470}
-  closeRate: 0.5
-  aiStateLife: 1
-  ChangeStateTorance: 3
-  eneatackradius: 0.7
-  _state: 0
 --- !u!61 &4117377028620856770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -288,3 +260,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4054903, y: 3.28}
   m_EdgeRadius: 0
+--- !u!114 &-7329990075422837471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745793057940756041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b13e4d8d5d8747b072fb171fecd95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chSpeed: 5
+  _chStatus: 100
+  _chPower:
+  - 0
+  _chjumpForce: 5
+  _gravity: 3
+  _isGrounded: 0
+  _isDead: 0
+  _atackradius: 0.7
+  _atackPoint: {fileID: 1357795685003253470}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _atackDistance: 0
+  _retreatHealthThreshold: 0
+  _plSc: {fileID: -2438906299211093894, guid: 56fcd2540e120c64aaade2f57baf6c47, type: 3}
+  _hitPlayer: []
+  _ChangeStateTorance: 3
+  _closeRate: 0.5
+  _aiStateLife: 1
+  _state: 0
+--- !u!114 &-4422497658242053304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745793057940756041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148a913c9a0993b4b9469fff867538c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status_helth: 100
+  helthslider: {fileID: 0}

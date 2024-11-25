@@ -35,19 +35,20 @@ public class CharacterManager : MonoBehaviour
     [System.Serializable]
     public class CharaBase
     {
-        public string charId;
+        public string charId;         //キャラID
         public GameObject Prefab;
     }
 
     [System.Serializable]
     public class PlayerBase
     {
-        public string playerID;
-        public string inputId;
-        public bool hasCharactoer;
-        public GameObject playerPrefab;
+        public string playerID;         //プレイヤーID
+        public string inputId;　　　　　//入力ID
+        public bool hasCharactoer;　　　//プレイヤーがキャラを選択したかどうかチェック用
+        public GameObject playerPrefab; 
         public int score;
-        public PLAYER_TYPE _plType;
+        public PLAYER_TYPE _plType;     //playerがAIか人間か
+        public StateManager plStatus;
 
         public enum PLAYER_TYPE
         {
