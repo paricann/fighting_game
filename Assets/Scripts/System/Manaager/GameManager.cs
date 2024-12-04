@@ -70,7 +70,7 @@ namespace fighting_game
                 Debug.Log("処理が通っているよ！");
                 _level.leveltimer.text = remainingTime.ToString("F2"); // 残り時間を小数点以下2桁で表示
             
-                if(_timeCount.GetRemainingTime() < 0)
+                if(_timeCount < 0)
                 {
                     //ターンを終わらす処理
                     EndTurnFunction(true);
